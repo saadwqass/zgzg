@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#14251f" />
+  <title>نَبّه — نموذج جاهزية الطلب</title>
+  <style>
+    :root{
+      --ink:#17251f;--muted:#718078;--line:#e5ebe6;--paper:#f5f7f4;--white:#fff;
+      --green:#217a55;--green-2:#dff3e8;--green-3:#eff9f3;--amber:#a96612;--amber-bg:#fff4df;
+      --red:#b84e48;--red-bg:#fff0ee;--nav:#14251f;--shadow:0 12px 34px rgba(23,37,31,.07);--radius:22px;
+    }
+    *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:Tahoma,"Arial",sans-serif;line-height:1.55}
+    button,input,select{font:inherit} button{cursor:pointer} .app{min-height:100vh}
+    .topbar{height:74px;background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 max(4vw,18px);position:sticky;top:0;z-index:10;box-shadow:0 5px 20px #10241b24}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:21px;letter-spacing:-.5px}.brand-mark{width:38px;height:38px;border-radius:13px;background:#c8f0d8;color:#155b3c;display:grid;place-items:center;font-size:22px;font-weight:900}
+    .top-actions{display:flex;gap:9px;align-items:center}.demo-chip{font-size:11px;color:#d3e9db;background:#ffffff14;border:1px solid #ffffff20;padding:6px 10px;border-radius:30px}
+    .navtabs{display:flex;gap:6px;background:#ffffff12;padding:5px;border-radius:13px}.navtabs button{border:0;background:transparent;color:#d4e0d8;padding:8px 12px;border-radius:9px;font-size:13px}.navtabs button.active{background:#fff;color:var(--nav);font-weight:bold}
+    .wrap{max-width:1240px;margin:0 auto;padding:30px 22px 60px}.page{display:none}.page.active{display:block;animation:fade .2s ease}@keyframes fade{from{opacity:.4;transform:translateY(5px)}to{opacity:1;transform:none}}
+    .heading{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:23px}.eyebrow{font-size:12px;color:var(--green);font-weight:bold;letter-spacing:.2px}.heading h1{font-size:29px;line-height:1.25;margin:5px 0 4px;letter-spacing:-.7px}.sub{color:var(--muted);font-size:14px;margin:0}.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:700;font-size:13px;transition:.15s;display:inline-flex;align-items:center;justify-content:center;gap:7px}.btn:hover{transform:translateY(-1px)}.primary{background:var(--green);color:white;box-shadow:0 6px 15px #217a5527}.secondary{background:#edf2ee;color:#294037}.ghost{background:white;color:#40534a;border:1px solid var(--line)}.dark{background:var(--nav);color:white}.small{padding:8px 11px;font-size:12px;border-radius:10px}.danger{background:var(--red-bg);color:var(--red)}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}.stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 19px;box-shadow:0 4px 18px #18342605}.stat-top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px}.stat-icon{width:34px;height:34px;border-radius:11px;background:#eff6f1;display:grid;place-items:center;font-size:17px}.stat strong{display:block;font-size:27px;margin-top:11px;letter-spacing:-.5px}.stat small{color:var(--muted);font-size:11px}
+    .dashboard-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);gap:18px;align-items:start}.card{background:white;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.card-head{padding:19px 21px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px}.card-head h2{font-size:16px;margin:0}.card-head p{font-size:11px;color:var(--muted);margin:3px 0 0}.card-body{padding:0 21px 21px}
+    .order-form{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:11px;color:#62736a;font-weight:bold}.field input,.field select{width:100%;height:43px;border:1px solid #dfe7e1;border-radius:11px;padding:0 12px;background:#fbfcfb;color:var(--ink);outline:none}.field input:focus,.field select:focus{border-color:#6ba98a;box-shadow:0 0 0 3px #dff3e8}.form-footer{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:3px}.hint{color:var(--muted);font-size:10px}
+    .orders-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.filters{display:flex;gap:5px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:white;color:#67776e;border-radius:20px;padding:6px 10px;font-size:11px}.filter.active{background:#e8f4ec;border-color:#d0e9d9;color:#236747;font-weight:bold}.order-list{display:flex;flex-direction:column;gap:9px}.order-row{border:1px solid var(--line);border-radius:15px;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px}.order-main{display:flex;gap:11px;align-items:center;min-width:0}.order-symbol{width:40px;height:40px;border-radius:13px;background:#f0f4f1;display:grid;place-items:center;font-weight:900;color:#3f5b4c;flex-shrink:0}.order-info{min-width:0}.order-info strong{font-size:14px;display:block}.order-info span{font-size:11px;color:var(--muted);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.status{border-radius:30px;padding:5px 9px;font-size:10px;font-weight:bold;white-space:nowrap}.status.preparing{background:var(--amber-bg);color:#996019}.status.ready{background:var(--green-2);color:#176842}.status.delivered{background:#edf0ef;color:#647169}.order-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}.empty{padding:26px;text-align:center;color:var(--muted);font-size:13px}
+    .notice{border-radius:14px;background:#f2f6f3;padding:13px 14px;font-size:11px;color:#53675b;display:flex;gap:9px;align-items:flex-start;margin-top:15px}.notice b{color:#31483a}.notice.warning{background:#fff7e9;color:#88602e}
+    .customer-shell{max-width:540px;margin:0 auto}.customer-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.customer-card{border-radius:28px;overflow:hidden;background:white;border:1px solid var(--line);box-shadow:var(--shadow);transition:.3s}.customer-card.is-ready{border-color:#c7ead5;box-shadow:0 16px 50px #22794a18}.customer-hero{padding:26px 25px 25px;background:#f0f4f0;transition:.3s}.is-ready .customer-hero{background:linear-gradient(145deg,#e3f7ea,#f3fbf5)}.hero-top{display:flex;justify-content:space-between;align-items:center}.tiny-brand{font-weight:900;font-size:14px}.secure{font-size:10px;color:#718078;background:#ffffffb8;border-radius:30px;padding:5px 9px}.order-label{font-size:12px;color:#75847b;margin:29px 0 1px}.big-order{font-size:43px;font-weight:900;letter-spacing:-1.5px}.customer-message{font-size:13px;color:#687a70;margin-top:4px}.ready-title{display:none;color:#177246;font-weight:900;font-size:23px;margin-top:8px}.is-ready .ready-title{display:block}.is-ready .customer-message{display:none}.progress{display:flex;align-items:flex-start;gap:0;padding:22px 22px 18px}.step{flex:1;position:relative;text-align:center;color:#9aa59e;font-size:10px}.step:not(:last-child):after{content:"";height:2px;background:#e5ebe6;position:absolute;top:13px;right:calc(50% + 18px);left:calc(-50% + 18px)}.step.done:not(:last-child):after{background:#73b88e}.step-dot{width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:#edf1ee;color:#819087;margin:0 auto 7px;position:relative;z-index:1;font-size:12px}.step.done .step-dot{background:#d9f1e2;color:#176c43}.step.current{color:#314b3c;font-weight:bold}.step.current .step-dot{background:#247b53;color:white;box-shadow:0 0 0 4px #e0f3e7}.customer-detail{padding:0 22px 20px}.game-card{background:#f7f8f6;border:1px solid #e9eeea;border-radius:17px;padding:15px}.game-top{display:flex;justify-content:space-between;align-items:center}.game-top strong{font-size:13px}.game-top span{font-size:10px;color:var(--muted)}.game-desc{font-size:11px;color:var(--muted);margin:6px 0 12px}.game-action{display:flex;align-items:center;gap:8px}.game-action .btn{flex:1}.score{font-size:12px;font-weight:bold;color:#41604e;min-width:52px;text-align:center}.customer-footer{display:flex;justify-content:space-between;color:#9aa49e;font-size:10px;padding:13px 22px;border-top:1px solid #edf0ed}
+    .wall{background:#13231d;color:white;border-radius:26px;padding:28px;min-height:490px;box-shadow:var(--shadow)}.wall-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ffffff1a;padding-bottom:18px}.wall-head h2{margin:0;font-size:21px}.wall-head span{color:#b7c9bf;font-size:12px}.wall-ready{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;padding-top:23px}.wall-item{background:#ffffff0d;border:1px solid #ffffff16;border-radius:19px;padding:18px;text-align:center}.wall-item small{color:#bed0c6}.wall-item strong{display:block;font-size:38px;margin:5px}.wall-item em{font-style:normal;color:#92e0b1;font-size:11px}.wall-empty{text-align:center;color:#a8b9b0;padding:90px 10px}
+    .login-note{font-size:12px;color:#65746c}.footer-note{text-align:center;color:#94a199;font-size:10px;margin-top:24px}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:#172a21;color:white;padding:11px 16px;border-radius:12px;font-size:12px;opacity:0;pointer-events:none;transition:.25s;z-index:30;box-shadow:var(--shadow)}.toast.show{opacity:1;transform:translate(-50%,0)}
+    .modal-backdrop{display:none;position:fixed;inset:0;background:#10221bcc;z-index:40;align-items:center;justify-content:center;padding:20px}.modal-backdrop.show{display:flex}.modal{background:white;border-radius:22px;padding:23px;width:min(100%,420px);box-shadow:0 20px 70px #0004}.modal h3{margin:0 0 8px}.modal p{font-size:12px;color:var(--muted)}.modal-actions{display:flex;gap:8px;margin-top:18px}.modal-actions>*{flex:1}
+    .login-overlay{position:fixed;inset:0;background:linear-gradient(145deg,#13271f,#203e31);z-index:60;display:flex;align-items:center;justify-content:center;padding:20px}.login-overlay.hidden{display:none}.login-panel{width:min(100%,410px);background:#fff;border-radius:25px;padding:28px;box-shadow:0 24px 80px #0005}.login-logo{width:48px;height:48px;background:#dcf3e5;color:#176440;border-radius:16px;display:grid;place-items:center;font-size:25px;font-weight:900;margin-bottom:18px}.login-panel h2{margin:0 0 6px;font-size:23px}.login-panel>p{color:var(--muted);font-size:12px;margin:0 0 20px}.login-panel .field{margin-bottom:12px}.login-panel .btn{width:100%;margin-top:7px}.login-warning{font-size:10px;color:#8c6a35;background:#fff7e7;border-radius:10px;padding:10px;margin-top:14px}
+    @media(max-width:850px){.dashboard-grid{grid-template-columns:1fr}.stats{gap:9px}.stat{padding:14px}.stat strong{font-size:23px}}
+    @media(max-width:600px){.topbar{height:auto;min-height:70px;align-items:flex-start;padding:13px 15px;gap:10px;flex-direction:column}.top-actions{width:100%;justify-content:space-between}.navtabs{flex:1;justify-content:space-around}.navtabs button{padding:8px 9px;font-size:11px}.wrap{padding:22px 13px 40px}.heading{align-items:flex-start;flex-direction:column}.heading h1{font-size:25px}.stats{grid-template-columns:repeat(3,1fr)}.stat-top{font-size:10px}.stat-icon{display:none}.stat strong{font-size:21px}.stat small{font-size:9px}.order-form{grid-template-columns:1fr}.field.full,.form-footer{grid-column:auto}.form-footer{align-items:flex-start;flex-direction:column}.order-row{align-items:flex-start;flex-wrap:wrap}.order-actions{width:100%;justify-content:flex-end}.card-head{padding:16px 15px 12px}.card-body{padding:0 15px 16px}.wall{padding:19px;min-height:420px}.wall-item strong{font-size:31px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark">ن</div><span>نَبّه</span><span class="demo-chip">نموذج تفاعلي تجريبي</span></div>
+    <div class="top-actions">
+      <div class="navtabs" role="tablist" aria-label="التنقل">
+        <button class="active" data-page="admin">لوحة الموظف</button>
+        <button data-page="customer">صفحة العميل</button>
+        <button data-page="wall">شاشة الصالة</button>
+      </div>
+      <button class="btn small" id="logout" style="background:#ffffff18;color:#fff;border:1px solid #ffffff25">خروج</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="page-admin" class="page active">
+      <div class="heading">
+        <div><div class="eyebrow">إدارة الطلبات / الفرع الرئيسي</div><h1>أهلاً بك 👋</h1><p class="sub">تابع الطلبات وأخبر العميل عندما يصبح طلبه جاهزاً.</p></div>
+        <button class="btn primary" id="jump-add">＋ إضافة طلب جديد</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="stat-top"><span>إجمالي الطلبات</span><span class="stat-icon">▤</span></div><strong id="stat-total">3</strong><small>في هذه التجربة</small></div>
+        <div class="stat"><div class="stat-top"><span>قيد التجهيز</span><span class="stat-icon">◷</span></div><strong id="stat-preparing">2</strong><small>بانتظار التحديث</small></div>
+        <div class="stat"><div class="stat-top"><span>جاهزة للاستلام</span><span class="stat-icon">✓</span></div><strong id="stat-ready">1</strong><small>يمكن للعملاء الاستلام</small></div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="card" id="orders-card">
+          <div class="card-head"><div><h2>الطلبات الحالية</h2><p>غيّر حالة الطلب بنقرة واحدة</p></div><button class="btn ghost small" id="reset-demo">إعادة التجربة</button></div>
+          <div class="card-body">
+            <div class="orders-toolbar"><div class="filters"><button class="filter active" data-filter="all">الكل</button><button class="filter" data-filter="preparing">قيد التجهيز</button><button class="filter" data-filter="ready">جاهز</button><button class="filter" data-filter="delivered">تم التسليم</button></div><span class="hint" id="order-count">3 طلبات</span></div>
+            <div class="order-list" id="order-list"></div>
+          </div>
+        </div>
+        <div class="card" id="add-card">
+          <div class="card-head"><div><h2>إضافة طلب يدوي</h2><p>أدخل رقم الفاتورة كما يظهر في نقطة البيع</p></div><span style="font-size:22px">✎</span></div>
+          <div class="card-body">
+            <form id="add-form" class="order-form">
+              <div class="field"><label for="invoice">رقم الفاتورة *</label><input id="invoice" required inputmode="numeric" placeholder="مثال: 893" maxlength="16" /></div>
+              <div class="field"><label for="item">وصف مختصر (اختياري)</label><input id="item" placeholder="مثال: قهوة وساندويتش" maxlength="60" /></div>
+              <div class="field full"><label for="channel">طريقة متابعة العميل</label><select id="channel"><option value="qr">رابط / QR على هاتف العميل</option><option value="screen">شاشة الصالة</option><option value="both">الهاتف + شاشة الصالة</option></select></div>
+              <div class="form-footer"><span class="hint">لا نحتاج اسم العميل أو رقم هاتفه في هذا النموذج.</span><button class="btn primary" type="submit">إنشاء الطلب ←</button></div>
+            </form>
+            <div class="notice"><span>🔒</span><div><b>خصوصية العميل</b><br>الرابط النهائي يجب أن يحتوي على رمز عشوائي غير قابل للتخمين، وليس رقم الفاتورة وحده.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="notice warning"><span>⚙️</span><div><b>مهم: هذه نسخة واجهة تجريبية.</b><br>الحسابات والطلبات محفوظة محلياً في هذا المتصفح فقط. قبل التشغيل الحقيقي نربط Supabase Auth وDatabase وRealtime ونضيف صلاحيات RLS.</div></div>
+    </section>
+
+    <section id="page-customer" class="page">
+      <div class="heading"><div><div class="eyebrow">تجربة العميل</div><h1>صفحة متابعة الطلب</h1><p class="sub">هذه هي الصفحة التي يفتحها العميل بعد مسح رمز QR.</p></div><button class="btn ghost" id="customer-back">العودة للوحة الموظف</button></div>
+      <div class="customer-shell">
+        <div class="customer-top"><span class="hint">معاينة العميل</span><select id="customer-select" class="btn ghost small" aria-label="اختر طلباً"></select></div>
+        <div class="customer-card" id="customer-card">
+          <div class="customer-hero">
+            <div class="hero-top"><div class="tiny-brand">نَبّه <span style="font-weight:400;color:#809087">· تجربة انتظار أفضل</span></div><span class="secure">● رابط خاص بطلبك</span></div>
+            <div class="order-label">رقم طلبك</div><div class="big-order" id="customer-number">890</div>
+            <div class="customer-message" id="customer-message">طلبك قيد التجهيز الآن. سنخبرك فور جاهزيته.</div>
+            <div class="ready-title">طلبك جاهز! تفضل للاستلام 🎉</div>
+          </div>
+          <div class="progress">
+            <div class="step done" id="step-received"><div class="step-dot">✓</div>تم الاستلام</div>
+            <div class="step current" id="step-preparing"><div class="step-dot">◷</div>قيد التجهيز</div>
+            <div class="step" id="step-ready"><div class="step-dot">✓</div>جاهز</div>
+          </div>
+          <div class="customer-detail">
+            <div class="game-card">
+              <div class="game-top"><strong>🎮 تحدي الانتظار السريع</strong><span>اختياري · 10 ثوانٍ</span></div>
+              <p class="game-desc">اضغط أكبر عدد ممكن من المرات قبل انتهاء الوقت. لعبة بسيطة لتمضية الانتظار.</p>
+              <div class="game-action"><button class="btn secondary small" id="game-btn">ابدأ التحدي</button><div class="score" id="game-time">10 ثوانٍ</div><div class="score" id="game-score">0 ضغطة</div></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:15px;gap:8px"><span class="hint">هل وصلت؟ اتبع تعليمات موظف الاستلام.</span><button class="btn ghost small" id="copy-link">نسخ رابط الطلب</button></div>
+          </div>
+          <div class="customer-footer"><span>لا حاجة إلى تحميل تطبيق</span><span>نَبّه © 2026</span></div>
+        </div>
+        <div class="notice"><span>💡</span><div>عند الجاهزية تتغير ألوان الصفحة وتظهر رسالة واضحة. إذا أغلق العميل الصفحة، فالتنبيه الحقيقي يحتاج Web Push وموافقة العميل؛ البلوتوث من صفحة ويب ليس بديلاً موثوقاً للإشعارات في الخلفية.</div></div>
+      </div>
+    </section>
+
+    <section id="page-wall" class="page">
+      <div class="heading"><div><div class="eyebrow">واجهة العرض داخل المحل</div><h1>شاشة الطلبات الجاهزة</h1><p class="sub">تُعرض على تلفزيون أو شاشة موجودة في المحل.</p></div><button class="btn ghost" id="wall-back">العودة للوحة الموظف</button></div>
+      <div class="wall"><div class="wall-head"><h2>طلبات جاهزة للاستلام</h2><span>يرجى التوجه إلى نقطة الاستلام</span></div><div class="wall-ready" id="wall-ready"></div></div>
+      <p class="footer-note">يمكن تشغيل هذه الصفحة على متصفح تلفزيون أو جهاز كمبيوتر موصول بشاشة. في النسخة الحقيقية تتحدث تلقائياً عبر Supabase Realtime.</p>
+    </section>
+  </main>
+</div>
+<div class="login-overlay" id="login-overlay">
+  <form class="login-panel" id="login-form">
+    <div class="login-logo">ن</div>
+    <div class="eyebrow">مساحة الموظفين</div>
+    <h2>تسجيل الدخول</h2>
+    <p>ادخل إلى لوحة متابعة الطلبات في نَبّه.</p>
+    <div class="field"><label for="login-email">البريد الإلكتروني</label><input id="login-email" type="email" value="admin@demo.sa" required /></div>
+    <div class="field"><label for="login-password">كلمة المرور</label><input id="login-password" type="password" value="demo1234" required /></div>
+    <button class="btn primary" type="submit">دخول إلى لوحة التحكم</button>
+    <div class="login-warning">بيانات دخول تجريبية فقط. التحقق هنا شكلي داخل المتصفح؛ لا تستخدم هذا الملف لحماية بيانات حقيقية.</div>
+  </form>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<div class="modal-backdrop" id="link-modal"><div class="modal"><h3>رابط متابعة العميل</h3><p>في النموذج المحلي، الرابط للمعاينة داخل نفس المتصفح فقط. عند نشر النظام وربطه بقاعدة البيانات، سيكون رابطاً عاماً آمناً لكل طلب.</p><input id="link-value" readonly style="width:100%;padding:12px;border:1px solid #dfe7e1;border-radius:10px;direction:ltr;text-align:left" /><div class="modal-actions"><button class="btn primary" id="modal-copy">نسخ الرابط</button><button class="btn ghost" id="modal-close">إغلاق</button></div></div></div>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => [...document.querySelectorAll(s)];
+  const seed = [
+    {id:'demo-890',number:'890',item:'طلب قهوة مختصة',status:'preparing',channel:'qr',created:Date.now()-8*60000},
+    {id:'demo-891',number:'891',item:'طلب لاتيه وحلى',status:'ready',channel:'both',created:Date.now()-13*60000},
+    {id:'demo-892',number:'892',item:'طلب سفري',status:'preparing',channel:'screen',created:Date.now()-3*60000}
+  ];
+  let orders = load(); let filter = 'all'; let selectedId = orders[0]?.id || null; let gameTimer = null; let gameLeft = 10; let gameScore = 0; let toastTimer;
+  function load(){try{const d=JSON.parse(localStorage.getItem('nabbeh-orders-demo'));return Array.isArray(d)&&d.length?d:structuredClone(seed)}catch{return structuredClone(seed)}}
+  function save(){localStorage.setItem('nabbeh-orders-demo',JSON.stringify(orders))}
+  function statusText(s){return s==='ready'?'جاهز للاستلام':s==='delivered'?'تم التسليم':'قيد التجهيز'}
+  function cls(s){return s==='ready'?'ready':s==='delivered'?'delivered':'preparing'}
+  function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2500)}
+  function showPage(name){$$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));$$('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===name));if(name==='customer')renderCustomer();if(name==='wall')renderWall();window.scrollTo({top:0,behavior:'smooth'})}
+  $$('[data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+  $('#login-form').addEventListener('submit',e=>{e.preventDefault();if(!$('#login-email').value.trim()||!$('#login-password').value){toast('أدخل البريد وكلمة المرور');return}$('#login-overlay').classList.add('hidden');toast('مرحباً بك في لوحة نَبّه التجريبية')});
+  $('#logout').addEventListener('click',()=>$('#login-overlay').classList.remove('hidden'));
+  $('#jump-add').addEventListener('click',()=>{$('#invoice').focus();$('#add-card').scrollIntoView({behavior:'smooth',block:'center'})});
+  $('#customer-back').addEventListener('click',()=>showPage('admin'));$('#wall-back').addEventListener('click',()=>showPage('admin'));
+  function renderStats(){ $('#stat-total').textContent=orders.length;$('#stat-preparing').textContent=orders.filter(o=>o.status==='preparing').length;$('#stat-ready').textContent=orders.filter(o=>o.status==='ready').length; }
+  function renderOrders(){
+    const list=$('#order-list');const visible=orders.filter(o=>filter==='all'||o.status===filter);$('#order-count').textContent=visible.length+' طلبات';
+    if(!visible.length){list.innerHTML='<div class="empty">لا توجد طلبات في هذه الحالة.</div>';return}
+    list.innerHTML=visible.slice().sort((a,b)=>b.created-a.created).map(o=>`<div class="order-row"><div class="order-main"><div class="order-symbol">#</div><div class="order-info"><strong>طلب ${escapeHtml(o.number)}</strong><span>${escapeHtml(o.item||'بدون وصف')} · ${o.channel==='screen'?'شاشة الصالة':o.channel==='both'?'الهاتف والشاشة':'رابط العميل'}</span></div></div><span class="status ${cls(o.status)}">${statusText(o.status)}</span><div class="order-actions"><button class="btn ghost small" data-customer="${o.id}">معاينة العميل</button>${o.status==='preparing'?`<button class="btn primary small" data-ready="${o.id}">جاهز</button>`:o.status==='ready'?`<button class="btn secondary small" data-delivered="${o.id}">تم التسليم</button>`:`<button class="btn ghost small" disabled>مكتمل</button>`}</div></div>`).join('');
+    list.querySelectorAll('[data-ready]').forEach(b=>b.addEventListener('click',()=>changeStatus(b.dataset.ready,'ready')));
+    list.querySelectorAll('[data-delivered]').forEach(b=>b.addEventListener('click',()=>changeStatus(b.dataset.delivered,'delivered')));
+    list.querySelectorAll('[data-customer]').forEach(b=>b.addEventListener('click',()=>{selectedId=b.dataset.customer;showPage('customer')}));
+  }
+  function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+  function renderAll(){renderStats();renderOrders();renderCustomerSelect();renderWall()}
+  function changeStatus(id,status){const o=orders.find(x=>x.id===id);if(!o)return;o.status=status;o.updated=Date.now();save();renderAll();toast(status==='ready'?'تم تحديث الطلب وإظهار الجاهزية للعميل':'تم تسجيل تسليم الطلب');}
+  $$('.filter').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;$$('.filter').forEach(x=>x.classList.toggle('active',x===b));renderOrders()}));
+  $('#add-form').addEventListener('submit',e=>{e.preventDefault();const number=$('#invoice').value.trim();if(!number){toast('أدخل رقم الفاتورة أولاً');return}if(orders.some(o=>o.number===number&&o.status!=='delivered')){toast('هذا الرقم موجود بالفعل ضمن الطلبات الحالية');return}const order={id:'ord-'+Math.random().toString(36).slice(2,11),number,item:$('#item').value.trim(),status:'preparing',channel:$('#channel').value,created:Date.now()};orders.unshift(order);selectedId=order.id;save();e.target.reset();renderAll();toast('تم إنشاء الطلب '+number);showPage('customer')});
+  function renderCustomerSelect(){const s=$('#customer-select');if(!orders.length){s.innerHTML='<option>لا توجد طلبات</option>';return}if(!orders.some(o=>o.id===selectedId))selectedId=orders[0].id;s.innerHTML=orders.map(o=>`<option value="${o.id}" ${o.id===selectedId?'selected':''}>طلب ${escapeHtml(o.number)} — ${statusText(o.status)}</option>`).join('')}
+  function renderCustomer(){renderCustomerSelect();const o=orders.find(x=>x.id===selectedId)||orders[0];if(!o)return;$('#customer-number').textContent=o.number;$('#customer-message').textContent=o.status==='ready'?'أصبح طلبك جاهزاً. تفضل إلى نقطة الاستلام.':o.status==='delivered'?'تم تسجيل استلام طلبك. شكراً لزيارتك!':'طلبك قيد التجهيز الآن. سنخبرك فور جاهزيته.';const card=$('#customer-card');card.classList.toggle('is-ready',o.status==='ready');$('#step-received').className='step done';$('#step-preparing').className='step '+(o.status==='preparing'?'current':'done');$('#step-ready').className='step '+(o.status==='ready'||o.status==='delivered'?'done':'');$('#step-ready .step-dot').textContent=o.status==='ready'||o.status==='delivered'?'✓':'3';if(o.status==='delivered'){$('#step-ready').className='step done';$('#customer-message').textContent='تم استلام طلبك. نتمنى لك يوماً سعيداً!'}}
+  $('#customer-select').addEventListener('change',e=>{selectedId=e.target.value;renderCustomer()});
+  function renderWall(){const ready=orders.filter(o=>o.status==='ready');const box=$('#wall-ready');if(!box)return;if(!ready.length){box.innerHTML='<div class="wall-empty" style="grid-column:1/-1"><div style="font-size:42px;margin-bottom:10px">☕</div>لا توجد طلبات جاهزة حالياً<br><small>ستظهر أرقام الطلبات هنا فور جاهزيتها</small></div>';return}box.innerHTML=ready.map(o=>`<div class="wall-item"><small>رقم الطلب</small><strong>${escapeHtml(o.number)}</strong><em>جاهز للاستلام ✓</em></div>`).join('')}
+  $('#copy-link').addEventListener('click',()=>openLinkModal());
+  function openLinkModal(){const o=orders.find(x=>x.id===selectedId)||orders[0];if(!o)return;const fake=location.href.split('#')[0]+'#customer='+encodeURIComponent(o.number)+'&demo='+encodeURIComponent(o.id);$('#link-value').value=fake;$('#link-modal').classList.add('show')}
+  $('#modal-close').addEventListener('click',()=>$('#link-modal').classList.remove('show'));
+  $('#link-modal').addEventListener('click',e=>{if(e.target.id==='link-modal')$('#link-modal').classList.remove('show')});
+  async function copyText(txt){try{await navigator.clipboard.writeText(txt);toast('تم نسخ الرابط')}catch{const x=document.createElement('textarea');x.value=txt;document.body.appendChild(x);x.select();document.execCommand('copy');x.remove();toast('تم نسخ الرابط')}}
+  $('#modal-copy').addEventListener('click',()=>copyText($('#link-value').value));
+  $('#game-btn').addEventListener('click',()=>{if(gameTimer){gameScore++;$('#game-score').textContent=gameScore+' ضغطة';return}gameLeft=10;gameScore=0;$('#game-btn').textContent='اضغط بسرعة!';$('#game-time').textContent='10 ثوانٍ';$('#game-score').textContent='0 ضغطة';gameTimer=setInterval(()=>{gameLeft--;$('#game-time').textContent=gameLeft+' ثوانٍ';if(gameLeft<=0){clearInterval(gameTimer);gameTimer=null;$('#game-btn').textContent='العب مرة أخرى';$('#game-time').textContent='انتهى الوقت';toast('أحسنت! سجلت '+gameScore+' ضغطة')}} ,1000)});
+  $('#reset-demo').addEventListener('click',()=>{orders=structuredClone(seed);selectedId=orders[0].id;filter='all';$$('.filter').forEach(x=>x.classList.toggle('active',x.dataset.filter==='all'));save();renderAll();toast('تمت إعادة الطلبات التجريبية')});
+  // Support a local preview hash when copied within this same browser.
+  const hash=new URLSearchParams(location.hash.replace(/^#/,''));if(hash.get('demo')&&orders.some(o=>o.id===hash.get('demo'))){selectedId=hash.get('demo');showPage('customer')}
+  renderAll();
+})();
+</script>
+</body>
+</html>
